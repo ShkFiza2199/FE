@@ -1,0 +1,85 @@
+<!-- index.html (Dashboard with Updated Theme) -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Maktab Dashboard</title>
+  <style>
+    body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #f9f9f9; }
+    .topbar {
+      background-color: #1a5632;
+      color: white;
+      padding: 15px 20px;
+      font-size: 1.2em;
+      font-weight: bold;
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
+    }
+    .wrapper {
+      display: flex;
+    }
+    .sidebar {
+      background-color: #f2f2f2;
+      width: 200px;
+      height: 100vh;
+      padding: 20px;
+      border-top-left-radius: 12px;
+      border-bottom-left-radius: 12px;
+    }
+    .sidebar a {
+      display: block;
+      padding: 10px 15px;
+      color: #333;
+      font-weight: 500;
+      text-decoration: none;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    .sidebar a:hover, .sidebar a.active {
+      background-color: #1a5632;
+      color: white;
+    }
+    .main {
+      flex: 1;
+      padding: 40px;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      text-align: center;
+    }
+    .btn {
+      padding: 12px 20px;
+      background-color: #f37022;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1em;
+      margin: 10px;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background-color: #d95c11;
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">MAKTAB FEES</div>
+  <div class="wrapper">
+    <div class="sidebar">
+      <a href="index.html" class="active">Dashboard</a>
+      <a href="admission.html">Students</a>
+      <a href="search.html">Search Students</a>
+    </div>
+    <div class="main">
+      <div class="container">
+        <h1>Welcome to Maktab Dashboard</h1>
+        <a href="admission.html"><button class="btn">Add Student</button></a>
+        <a href="search.html"><button class="btn">Search Student</button></a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
