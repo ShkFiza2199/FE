@@ -1,109 +1,44 @@
-<!-- search.html (Updated Theme) -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Search Student</title>
-  <style>
-    body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #f9f9f9; }
-    .topbar {
-      background-color: #1a5632;
-      color: white;
-      padding: 15px 20px;
-      font-size: 1.2em;
-      font-weight: bold;
-      border-top-left-radius: 12px;
-      border-top-right-radius: 12px;
-    }
-    .wrapper {
-      display: flex;
-    }
-    .sidebar {
-      background-color: #f2f2f2;
-      width: 200px;
-      height: 100vh;
-      padding: 20px;
-      border-top-left-radius: 12px;
-      border-bottom-left-radius: 12px;
-    }
-    .sidebar a {
-      display: block;
-      padding: 10px 15px;
-      color: #333;
-      font-weight: 500;
-      text-decoration: none;
-      border-radius: 8px;
-      margin-bottom: 10px;
-    }
-    .sidebar a:hover, .sidebar a.active {
-      background-color: #1a5632;
-      color: white;
-    }
-    .main {
-      flex: 1;
-      padding: 40px;
-    }
-    .container {
-      background: white;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-      max-width: 600px;
-      margin: auto;
-    }
-    input {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 15px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-    }
-    .btn {
-      padding: 12px 20px;
-      background-color: #f37022;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      font-size: 1em;
-      cursor: pointer;
-    }
-    .btn:hover {
-      background-color: #d95c11;
-    }
-    #searchResult {
-      margin-top: 15px;
-      font-weight: bold;
-    }
-  </style>
+  <title>Search</title>
 </head>
-<body>
-  <div class="topbar">MAKTAB FEES</div>
-  <div class="wrapper">
-    <div class="sidebar">
-      <a href="index.html">Dashboard</a>
-      <a href="admission.html">Students</a>
-      <a href="search.html">Search Students</a>
-    </div>
-    <div class="main">
-      <div class="container">
-        <h2>Search Student</h2>
-        <input type="text" id="roll" placeholder="Enter Roll No">
-        <button class="btn" onclick="searchStudent()">Search</button>
-        <div id="searchResult"></div>
-      </div>
-    </div>
+<body style="margin: 0; background-color: #0e0c2b; font-family: 'Poppins', sans-serif; color: white;">
+
+  <div style="text-align: center; color: #ff4b5c; font-size: 28px; margin: 30px 0;">
+    <b>Search</b>
   </div>
-  <script>
-    const db = JSON.parse(localStorage.getItem("students") || "[]");
-    function searchStudent() {
-      const roll = document.getElementById("roll").value;
-      const student = db.find(s => s.roll == roll);
-      if (student) {
-        document.getElementById("searchResult").innerText = `Name: ${student.name}, Phone: ${student.phone}`;
-      } else {
-        document.getElementById("searchResult").innerText = "Student not found.";
-      }
-    }
-  </script>
+
+  <form method="POST" action="/search" style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
+    <input type="text" name="query" placeholder="Search by Name or Roll Number" required
+      style="width: 80%; max-width: 600px; padding: 12px; border-radius: 8px; border: none; background-color: #111c44; color: white; font-size: 16px;">
+    
+    <button type="submit"
+      style="background-color: #ff4b5c; color: white; border: none; padding: 12px 30px; border-radius: 8px; font-size: 16px; cursor: pointer;">
+      🔍 Search
+    </button>
+  </form>
+
+   <div style="position: fixed; bottom: 0; width: 100%; background-color: #111c44; display: flex; justify-content: space-around; padding: 10px 0;">
+  <a href="search.html" style="color: white; text-align: center; text-decoration: none;">
+    <div style="font-size: 18px;">🔍</div>
+    <div style="font-size: 14px;">Search</div>
+  </a>
+  <a href="pending.html" style="color: white; text-align: center; text-decoration: none;">
+    <div style="font-size: 18px;">⚠️</div>
+    <div style="font-size: 14px;">Pending</div>
+  </a>
+  <a href="due_soon.html" style="color: white; text-align: center; text-decoration: none;">
+    <div style="font-size: 18px;">⏰</div>
+    <div style="font-size: 14px;">Due Soon</div>
+  </a>
+  <a href="dashboard.html" style="color: white; text-align: center; text-decoration: none;">
+    <div style="font-size: 18px;">📋</div>
+    <div style="font-size: 14px;">Dashboard</div>
+  </a>
+</div>
+  </div>
+
 </body>
 </html>

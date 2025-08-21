@@ -1,4 +1,3 @@
-<!-- admission.html (Updated Theme) -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,6 +13,21 @@
       font-weight: bold;
       border-top-left-radius: 12px;
       border-top-right-radius: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .topbar button.logout {
+      background-color: #f37022;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      color: white;
+      cursor: pointer;
+      font-weight: 500;
+    }
+    .topbar button.logout:hover {
+      background-color: #d95c11;
     }
     .wrapper {
       display: flex;
@@ -78,7 +92,10 @@
   </style>
 </head>
 <body>
-  <div class="topbar">MAKTAB FEES</div>
+  <div class="topbar">
+    MAKTAB FEES
+    <button class="logout" onclick="logout()">Logout</button>
+  </div>
   <div class="wrapper">
     <div class="sidebar">
       <a href="index.html">Dashboard</a>
@@ -98,6 +115,11 @@
     </div>
   </div>
   <script>
+    function logout() {
+      localStorage.removeItem("isLoggedIn");
+      window.location.href = "login.html";
+    }
+
     const studentDB = JSON.parse(localStorage.getItem("students") || "[]");
     function addStudent() {
       const name = document.getElementById('name').value;

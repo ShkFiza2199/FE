@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body style="margin: 0; background-color: #0e0c2b; font-family: 'Poppins', sans-serif; color: white;">
+
+  <div style="text-align: center; color: #ff4b5c; font-size: 28px; margin: 30px 0;">
+    <b>Dashboard</b>
+  </div>
+
+  <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; margin-bottom: 40px;">
+    <div style="background-color: #111c44; padding: 20px 40px; border-radius: 10px;">
+      <div style="color: white;">Total Students</div>
+      <div style="color: #41ff41; font-size: 24px;"><b>{{ total_students }}</b></div>
+    </div>
+    <div style="background-color: #111c44; padding: 20px 40px; border-radius: 10px;">
+      <div style="color: white;">Pending Fees</div>
+      <div style="color: #ff4b5c; font-size: 24px;"><b>{{ pending_fees }}</b></div>
+    </div>
+    <div style="background-color: #111c44; padding: 20px 40px; border-radius: 10px;">
+      <div style="color: white;">Fees Due Soon</div>
+      <div style="color: #ffd700; font-size: 24px;"><b>{{ due_soon }}</b></div>
+    </div>
+    <div style="background-color: #111c44; padding: 20px 40px; border-radius: 10px;">
+      <div style="color: white;">Fees Paid Up</div>
+      <div style="color: #41ff41; font-size: 24px;"><b>{{ paid_up }}</b></div>
+    </div>
+  </div>
+
+  <div style="max-width: 400px; margin: 0 auto; background-color: #111c44; padding: 30px; border-radius: 12px;">
+    <div style="text-align: center; color: white; font-size: 16px; margin-bottom: 20px;">
+      <b>Fees Status Distribution</b>
+    </div>
+    <canvas id="feeChart"></canvas>
+    <div style="display: flex; justify-content: center; gap: 20px; margin-top: 20px; font-size: 14px;">
+      <span style="color: #ff4b5c;">⬤ Pending</span>
+      <span style="color: #ffd700;">⬤ Due Soon</span>
+      <span style="color: #41ff41;">⬤ Paid Up</span>
+    </div>
+  </div>
+
+  <div style="position: fixed; bottom: 0; width: 100%; background-color: #111c44; display: flex; justify-content: space-around; padding: 10px 0;">
+  <a href="search.html" style="color: white; text-align: center; text-decoration: none;">
+    <div style="font-size: 18px;">🔍</div>
+    <div style="font-size: 14px;">Search</div>
+  </a>
+  <a href="pending.html" style="color: white; text-align: center; text-decoration: none;">
+    <div style="font-size: 18px;">⚠️</div>
+    <div style="font-size: 14px;">Pending</div>
+  </a>
+  <a href="due_soon.html" style="color: white; text-align: center; text-decoration: none;">
+    <div style="font-size: 18px;">⏰</div>
+    <div style="font-size: 14px;">Due Soon</div>
+  </a>
+  <a href="dashboard.html" style="color: white; text-align: center; text-decoration: none;">
+    <div style="font-size: 18px;">📋</div>
+    <div style="font-size: 14px;">Dashboard</div>
+  </a>
+</div>
+
+  </div>
+
+  <script>
+    const ctx = document.getElementById('feeChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: ['Pending', 'Due Soon', 'Paid Up'],
+        datasets: [{
+          data: [{{ pending_fees }}, {{ due_soon }}, {{ paid_up }}],
+          backgroundColor: ['#ff4b5c', '#ffd700', '#41ff41'],
+          borderWidth: 0
+        }]
+      },
+      options: {
+        cutout: '70%',
+        plugins: {
+          legend: {
+            display: false
+          }
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>
