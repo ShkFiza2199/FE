@@ -1,43 +1,92 @@
-<!DOCTYPE html>
+{% load static %}
+<!DOCTYPE html> 
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Search</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      background-color: #0e0c2b;
+      font-family: 'Poppins', sans-serif;
+      color: white;
+    }
+    .title {
+      text-align: center;
+      color: #ff4b5c;
+      font-size: 28px;
+      margin: 30px 0;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+    input[type="text"] {
+      width: 80%;
+      max-width: 600px;
+      padding: 12px;
+      border-radius: 8px;
+      border: none;
+      background-color: #111c44;
+      color: white;
+      font-size: 16px;
+    }
+    button {
+      background-color: #ff4b5c;
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: #111c44;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+    }
+    .bottom-nav a {
+      color: white;
+      text-align: center;
+      text-decoration: none;
+      font-size: 14px;
+    }
+  </style>
 </head>
-<body style="margin: 0; background-color: #0e0c2b; font-family: 'Poppins', sans-serif; color: white;">
+<body>
 
-  <div style="text-align: center; color: #ff4b5c; font-size: 28px; margin: 30px 0;">
-    <b>Search</b>
-  </div>
+  <div class="title"><b>Search</b></div>
 
-  <form method="POST" action="/search" style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
-    <input type="text" name="query" placeholder="Search by Name or Roll Number" required
-      style="width: 80%; max-width: 600px; padding: 12px; border-radius: 8px; border: none; background-color: #111c44; color: white; font-size: 16px;">
-    
-    <button type="submit"
-      style="background-color: #ff4b5c; color: white; border: none; padding: 12px 30px; border-radius: 8px; font-size: 16px; cursor: pointer;">
-      🔍 Search
-    </button>
+  <form method="POST" action="{% url 'search' %}">
+    {% csrf_token %}
+    <input type="text" name="query" placeholder="Search by Name or Roll Number" required>
+    <button type="submit">🔍 Search</button>
   </form>
 
-   <div style="position: fixed; bottom: 0; width: 100%; background-color: #111c44; display: flex; justify-content: space-around; padding: 10px 0;">
-  <a href="search.html" style="color: white; text-align: center; text-decoration: none;">
-    <div style="font-size: 18px;">🔍</div>
-    <div style="font-size: 14px;">Search</div>
-  </a>
-  <a href="pending.html" style="color: white; text-align: center; text-decoration: none;">
-    <div style="font-size: 18px;">⚠️</div>
-    <div style="font-size: 14px;">Pending</div>
-  </a>
-  <a href="due_soon.html" style="color: white; text-align: center; text-decoration: none;">
-    <div style="font-size: 18px;">⏰</div>
-    <div style="font-size: 14px;">Due Soon</div>
-  </a>
-  <a href="dashboard.html" style="color: white; text-align: center; text-decoration: none;">
-    <div style="font-size: 18px;">📋</div>
-    <div style="font-size: 14px;">Dashboard</div>
-  </a>
-</div>
+  <div class="bottom-nav">
+    <a href="{% url 'search' %}">
+      <div>🔍</div>
+      <div>Search</div>
+    </a>
+    <a href="{% url 'pending' %}">
+      <div>⚠️</div>
+      <div>Pending</div>
+    </a>
+    <a href="{% url 'due_soon' %}">
+      <div>⏰</div>
+      <div>Due Soon</div>
+    </a>
+    <a href="{% url 'dashboard' %}">
+      <div>📋</div>
+      <div>Dashboard</div>
+    </a>
   </div>
 
 </body>

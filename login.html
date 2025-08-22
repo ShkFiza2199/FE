@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,8 +6,14 @@
     <title>Admin Login</title>
 </head>
 <body style="margin: 0; font-family: Arial; background-color: #0b0820; color: white; display: flex; justify-content: center; align-items: center; height: 100vh;">
-    <form method="POST" action="/login" style="background-color: #0f1d38; padding: 30px 40px; border-radius: 10px; text-align: center;">
+    <form method="POST" action="{% url 'login' %}" style="background-color: #0f1d38; padding: 30px 40px; border-radius: 10px; text-align: center;">
+        {% csrf_token %}
         <h2 style="color: #ff3c72; margin-bottom: 30px;">Admin Login</h2>
+
+        {% if error_message %}
+        <p style="color: #ff3c72;">{{ error_message }}</p>
+        {% endif %}
+
         <label style="display: block; text-align: left; margin-bottom: 5px;">Username:</label>
         <input type="text" name="username" required style="width: 100%; padding: 10px; border-radius: 5px; background-color: #060d1f; border: none; color: white; margin-bottom: 15px;">
 

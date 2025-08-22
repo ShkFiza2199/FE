@@ -1,21 +1,25 @@
-<!DOCTYPE html>
-<html>
+{% load static %}
+<!DOCTYPE html> 
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>Due Soon Fees</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
-      background-color: #0b1437;
+      background-color: #0e0c2b;
       color: white;
-      font-family: Arial, sans-serif;
+      font-family: 'Poppins', sans-serif;
       margin: 0;
       padding-bottom: 60px;
     }
     h1 {
       text-align: center;
       padding: 20px;
+      color: #ff4b5c;
     }
     .student-list {
-      max-width: 500px;
+      max-width: 600px;
       margin: auto;
       margin-top: 20px;
     }
@@ -38,29 +42,32 @@
       color: white;
       text-align: center;
       text-decoration: none;
+      font-size: 14px;
     }
   </style>
 </head>
 <body>
+
   <h1>Due Soon Fees</h1>
+
   <div class="student-list" id="dueList">
-    <!-- Student entries will appear here -->
+    <!-- Student entries injected here -->
   </div>
 
   <div class="bottom-nav">
-    <a href="search.html">
+    <a href="{% url 'search' %}">
       <div>🔍</div>
       <div>Search</div>
     </a>
-    <a href="pending.html">
+    <a href="{% url 'pending' %}">
       <div>⚠️</div>
       <div>Pending</div>
     </a>
-    <a href="due_soon.html">
+    <a href="{% url 'due_soon' %}">
       <div>⏰</div>
       <div>Due Soon</div>
     </a>
-    <a href="dashboard.html">
+    <a href="{% url 'dashboard' %}">
       <div>📋</div>
       <div>Dashboard</div>
     </a>
@@ -68,28 +75,34 @@
 
   <script>
     async function loadDueSoon() {
-      const res = await fetch('/api/fees');  // Same as pending
-      const data = await res.json();
-      const list = document.getElementById('dueList');
+      try {
+        const res = await fetch('/api/fees');
+        const data = await res.json();
+        const list = document.getElementById('dueList');
 
-      if (data.students && data.students.length > 0) {
-        data.students.forEach(s => {
-          const div = document.createElement("div");
-          div.className = "student-box";
-          div.innerHTML = `
-            <strong>Name:</strong> ${s.name}<br>
-            <strong>Roll No:</strong> ${s.roll}<br>
-            <strong>Phone:</strong> ${s.phone}<br>
-            <strong>Amount Due:</strong> ₹${s.amount}
-          `;
-          list.appendChild(div);
-        });
-      } else {
-        list.innerHTML = "<p style='text-align:center;'>No due soon fees found.</p>";
+        if (data.students && data.students.length > 0) {
+          data.students.forEach(s => {
+            const div = document.createElement("div");
+            div.className = "student-box";
+            div.innerHTML = `
+              <strong>Name:</strong> ${s.name}<br>
+              <strong>Roll No:</strong> ${s.roll}<br>
+              <strong>Phone:</strong> ${s.phone}<br>
+              <strong>Amount Due:</strong> ₹${s.amount}
+            `;
+            list.appendChild(div);
+          });
+        } else {
+          list.innerHTML = "<p style='text-align:center;'>No due soon fees found.</p>";
+        }
+      } catch (error) {
+        document.getElementById('dueList').innerHTML = "<p style='text-align:center;'>Error loading data.</p>";
+        console.error("Fetch error:", error);
       }
     }
 
     loadDueSoon();
   </script>
+
 </body>
 </html>
